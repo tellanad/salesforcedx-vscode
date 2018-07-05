@@ -63,7 +63,7 @@ artifacts:
 
 on_finish:
   - del C:\projects\devhub.key
-  - codecov --disable=gcov -f packages\salesforcedx-vscode-lwc-next\coverage\coverage.json
+  - codecov --disable=gcov
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: |
       [xml]$results = Get-Content junit-aggregate.xml

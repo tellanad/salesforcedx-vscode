@@ -64,12 +64,11 @@ artifacts:
 on_finish:
   - del C:\projects\devhub.key
   - codecov --disable=gcov
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: |
       [xml]$results = Get-Content junit-aggregate.xml
-      $failure = $results.SelectSingleNode("//failure")
-      if ($failure -ne $null) 
-      { 
-          $host.SetShouldExit(1)
-          Write-Host "Forcing build failure due to test failure(s) :'("
-      }
+        $failure = $results.SelectSingleNode("//failure")
+        if ($failure -ne $null) 
+        { 
+            $host.SetShouldExit(1)
+            Write-Host "Forcing build failure due to test failure(s) :'("
+        }

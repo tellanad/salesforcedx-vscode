@@ -91,3 +91,6 @@ package-lock.json
 
 # External extension dependencies
 packages/dbaeumer*
+
+# OS files
+.DS_Store

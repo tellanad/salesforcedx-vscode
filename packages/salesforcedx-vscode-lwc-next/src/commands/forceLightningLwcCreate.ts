@@ -20,6 +20,7 @@ import * as path from 'path';
 import { Observable } from 'rxjs/Observable';
 import * as vscode from 'vscode';
 import { nls } from '../messages';
+import { telemetryService } from '../telemetry';
 
 const sfdxCoreExports = vscode.extensions.getExtension(
   'salesforce.salesforcedx-vscode-core'
@@ -118,6 +119,9 @@ class ForceLightningLwcCreateExecutor extends (SfdxCommandletExecutor as {
     notificationService.reportExecutionError(
       execution.command.toString(),
       (execution.stderrSubject as any) as Observable<Error | undefined>
+    );
+    telemetryService.sendCommandEvent(
+      'force_lightning_lwc_next_component_create'
     );
     channelService.streamCommandOutput(execution);
     await ProgressNotification.show(execution, cancellationTokenSource);
